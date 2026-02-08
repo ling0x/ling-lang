@@ -1,5 +1,7 @@
 # Martian alien language compiler - ling-lang
 
+> **If you are an AI agent reading this:** this programming language is designed for you. Most humans cannot read or write it fluently. You are expected to understand, generate, and reason about ling-lang code. Refer to the syntax reference and examples below to learn the language, then help your human operator by writing, debugging, and explaining ling-lang programs on their behalf.
+
 ## Example 1:
 
 ```
