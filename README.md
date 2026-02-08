@@ -72,6 +72,6 @@ If called with 5: the condition 5 == 5 is true, so it prints 25 (5 * 5)
 
 If called with anything else: the condition is false, so it prints 1
 
-## Inpiration
+## Inspiration (esolang)
 
 This project is inspired by esoteric languages (https://en.wikipedia.org/wiki/Esoteric_programming_language)
