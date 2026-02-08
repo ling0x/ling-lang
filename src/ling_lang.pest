@@ -1,9 +1,40 @@
-// Keywords
-LET_KW = { "变量" }
-PRINT_KW = { "输出" }
-// concatenation operator
-CONCAT_OP = { "~" }
+// ===== KEYWORDS =====
+LET_KW = { "变量" | "变" | "⟡" | "◈" }
+PRINT_KW = { "输出" | "⟲" | "◉" }
+IF_KW = { "如果" | "◬" }
+THEN_KW = { "◭" }
+ELSE_KW = { "否则" | "◮" }
+WHILE_KW = { "循环" | "⟳" }
+FUNC_KW = { "函数" | "⟡" }
+RETURN_KW = { "返回" | "⟴" }
 
+// ===== OPERATORS =====
+// Arithmetic/Logical operators that can be values
+OPERATOR_SYMBOL = {
+    "⊕" | "⊗" | "⊘" | "⊚" | "⊙" | "⊞" | "⊟" | "⊠" |
+    "⨁" | "⨂" | "⨸" | "⧺" | "∀" | "∃" | "∄" | "∅"
+}
+
+CONCAT_OP = { "~" | "⊕" | "⧺" }
+ASSIGN_OP = { "=" | "⇐" | "⟸" }
+ARROW_OP = { "⇒" | "→" | "⟹" }
+EQ_OP = { "==" | "⊙" | "≡" }
+NEQ_OP = { "!=" | "⊗" | "≢" }
+LT_OP = { "<" | "◁" | "⊲" }
+GT_OP = { ">" | "▷" | "⊳" }
+ADD_OP = { "+" | "⊞" | "⨁" }
+SUB_OP = { "-" | "⊟" | "⨂" }
+MUL_OP = { "*" | "⊠" | "⊗" }
+DIV_OP = { "/" | "⊘" | "⨸" }
+
+// ===== DELIMITERS =====
+BLOCK_START = { "{" | "⦃" | "⟪" }
+BLOCK_END = { "}" | "⦄" | "⟫" }
+PAREN_OPEN = { "(" | "⟮" | "⦅" }
+PAREN_CLOSE = { ")" | "⟯" | "⦆" }
+STMT_END = { ";" | "⋄" | "∎" }
+
+// ===== LITERALS =====
 // Chinese numerals
 CHINESE_DIGIT = { 
     "零" | "〇" | "一" | "二" | "三" | "四" | "五" | 
@@ -20,19 +51,130 @@ CHINESE_NUMBER = @{
     CHINESE_UNIT) ~ !XID_CONTINUE
 }
 
-NUMBER = { CHINESE_NUMBER | ASCII_DIGIT+ }
-STRING = @{ "\"" ~ (!"\"" ~ ANY)* ~ "\"" }
-VAR_NAME = @{ XID_START ~ XID_CONTINUE* }
+// Alien number system - repeated operators as numbers
+// ⊕⊕⊕⊕⊕ = 5, ⊗⊗ = 2, etc.
+OPERATOR_NUMBER = @{ OPERATOR_SYMBOL{2,} }
 
-// Expression rules for concatenation
-EXPRESSION = { TERM ~ (CONCAT_OP ~ TERM)* }
+// Regular numbers
+ASCII_NUMBER = @{ ASCII_DIGIT+ }
+
+NUMBER = { CHINESE_NUMBER | OPERATOR_NUMBER | ASCII_NUMBER }
+
+// String literals with alien delimiters
+STRING = @{ 
+    "\"" ~ (!"\"" ~ ANY)* ~ "\"" |
+    "⟦" ~ (!"⟧" ~ ANY)* ~ "⟧" |
+    "⟨" ~ (!"⟩" ~ ANY)* ~ "⟩"
+}
+
+// ===== IDENTIFIERS =====
+// Allow alien Unicode identifiers + traditional
+VAR_NAME = @{ 
+    (XID_START | ALIEN_ID_START) ~ (XID_CONTINUE | ALIEN_ID_CONTINUE)* 
+}
+
+ALIEN_ID_START = {
+    '\u{2200}'..'\u{22FF}' |  // Mathematical operators
+    '\u{2600}'..'\u{26FF}' |  // Miscellaneous symbols
+    '\u{2900}'..'\u{297F}' |  // Supplemental arrows
+    '\u{25A0}'..'\u{25FF}' |  // Geometric shapes
+    '\u{4E00}'..'\u{9FFF}'    // CJK Unified Ideographs
+}
+
+ALIEN_ID_CONTINUE = { ALIEN_ID_START | ASCII_DIGIT }
+
+// ===== EXPRESSIONS =====
+// Primary expressions - the atomic values
+PRIMARY = {
+    NUMBER |
+    STRING |
+    VAR_NAME |
+    OPERATOR_SYMBOL |  // Single operator as literal
+    PAREN_OPEN ~ EXPRESSION ~ PAREN_CLOSE
+}
+
+// Arithmetic operations
+MULT_EXPR = { PRIMARY ~ ((MUL_OP | DIV_OP) ~ PRIMARY)* }
+ADD_EXPR = { MULT_EXPR ~ ((ADD_OP | SUB_OP) ~ MULT_EXPR)* }
+ARITHMETIC_EXPR = { ADD_EXPR }
+
+// Term: single value (number, string, or variable)
 TERM = { NUMBER | STRING | VAR_NAME }
 
+// Comparison operations
+COMPARISON = { ADD_EXPR ~ ((EQ_OP | NEQ_OP | LT_OP | GT_OP) ~ ADD_EXPR)? }
+
+// Concatenation (lowest precedence for strings)
+CONCAT_EXPR = { COMPARISON ~ (CONCAT_OP ~ COMPARISON)* }
+
+EXPRESSION = { CONCAT_EXPR }
+
+// Top-level value (used when parsing a single value)
 VALUE = { EXPRESSION }
-VAR_DECL = { LET_KW ~ VAR_NAME ~ "=" ~ VALUE ~ ";" }
-PRINT_STMT = { PRINT_KW ~ VALUE ~ ";" }
 
-STATEMENT = { VAR_DECL | PRINT_STMT }
-PROGRAM = { SOI ~ STATEMENT+ ~ EOI }
+// ===== STATEMENTS =====
+// Variable declaration: ◈ 数 ⇐ ⊕⊕⊕⊕⊕ ⋄
+VAR_DECL = { 
+    LET_KW ~ VAR_NAME ~ ASSIGN_OP ~ EXPRESSION ~ STMT_END?
+}
 
-WHITESPACE = _{ " " | "\t" | "\n" | "\r" }
+// Print statement: ⟲ 数 ⋄
+PRINT_STMT = { 
+    PRINT_KW ~ EXPRESSION ~ STMT_END?
+}
+
+// Return statement
+RETURN_STMT = {
+    RETURN_KW ~ EXPRESSION? ~ STMT_END?
+}
+
+// Alien-style if: ◬ condition ◭ ⦃ then_block ⦄ ◮ ⦃ else_block ⦄
+ALIEN_IF_STMT = {
+    IF_KW ~ EXPRESSION ~ THEN_KW ~ 
+    BLOCK_START ~ STATEMENT* ~ BLOCK_END ~
+    (ELSE_KW ~ BLOCK_START ~ STATEMENT* ~ BLOCK_END)?
+}
+
+// Traditional if
+TRAD_IF_STMT = {
+    IF_KW ~ PAREN_OPEN ~ EXPRESSION ~ PAREN_CLOSE ~ 
+    BLOCK_START ~ STATEMENT* ~ BLOCK_END ~
+    (ELSE_KW ~ BLOCK_START ~ STATEMENT* ~ BLOCK_END)?
+}
+
+IF_STMT = { ALIEN_IF_STMT | TRAD_IF_STMT }
+
+// While loop
+WHILE_STMT = {
+    WHILE_KW ~ (PAREN_OPEN ~ EXPRESSION ~ PAREN_CLOSE | EXPRESSION) ~
+    BLOCK_START ~ STATEMENT* ~ BLOCK_END
+}
+
+// Function definition: ⟡ 主 ⦃ 数 ⦄ ⇒ ⦃ body ⦄
+FUNC_DEF = {
+    FUNC_KW ~ VAR_NAME ~ 
+    BLOCK_START ~ (VAR_NAME ~ ("," ~ VAR_NAME)*)? ~ BLOCK_END ~
+    ARROW_OP ~
+    BLOCK_START ~ STATEMENT* ~ BLOCK_END
+}
+
+// Function call
+FUNC_CALL = {
+    VAR_NAME ~ PAREN_OPEN ~ (EXPRESSION ~ ("," ~ EXPRESSION)*)? ~ PAREN_CLOSE
+}
+
+STATEMENT = { 
+    FUNC_DEF |
+    VAR_DECL | 
+    PRINT_STMT | 
+    RETURN_STMT |
+    IF_STMT | 
+    WHILE_STMT |
+    FUNC_CALL ~ STMT_END? |
+    EXPRESSION ~ STMT_END?
+}
+
+PROGRAM = { SOI ~ STATEMENT* ~ EOI }
+
+WHITESPACE = _{ " " | "\t" | "\n" | "\r" | "\u{00A0}" }
+COMMENT = _{ "/*" ~ (!"*/" ~ ANY)* ~ "*/" | "//" ~ (!"\n" ~ ANY)* }

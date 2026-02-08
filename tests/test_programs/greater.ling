@@ -1,0 +1,7 @@
+⟡ test ⦃ n ⦄ ⇒ ⦃
+    ◬ n ⊙ 五 ◭ ⦃
+        ⟲ ⟦Greater than 5⟧ ⋄
+    ⦄ ◮ ⦃
+        ⟲ ⟦Less or equal⟧ ⋄
+    ⦄
+⦄

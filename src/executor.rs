@@ -21,7 +21,7 @@ pub fn execute_program(pair: pest::iterators::Pair<Rule>, env: &mut Environment)
             // Extract EXPRESSION from VALUE
             let expr_pair = value_pair.into_inner().next().unwrap();
             let value = evaluate_expression(expr_pair, env);
-            env.set_var(var_name, value);
+            env.set(var_name, value);
         }
         Rule::PRINT_STMT => {
             let mut inner = pair.into_inner();
@@ -34,6 +34,9 @@ pub fn execute_program(pair: pest::iterators::Pair<Rule>, env: &mut Environment)
             match value {
                 Value::Number(n) => println!("{}", n),
                 Value::String(s) => println!("{}", s),
+                Value::Boolean(b) => println!("{}", b),
+                Value::Function(f) => println!("<function {}>", f.name),
+                Value::Void => {}
             }
         }
         _ => {}
