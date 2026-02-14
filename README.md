@@ -76,18 +76,6 @@ If called with 5: the condition 5 == 5 is true, so it prints 25 (5 * 5)
 
 If called with anything else: the condition is false, so it prints 1
 
-## Previewing this README with the image
-
-To see the logo rendered above:
-
-- **GitHub/GitLab**: Push and view `README.md` — images in `assets/` render automatically.
-- **VS Code**: Open `README.md` and press `Ctrl+Shift+V` (or `Cmd+Shift+V` on macOS).
-- **CLI (Linux/macOS)**: Use `pandoc` to generate HTML:
-  ```bash
-  pandoc README.md -o README.html --standalone && open README.html
-  ```
-- **Ensure `assets/turtle-shell-lang.png` exists** at the repo root (same level as `README.md`).
-
 ## Inspiration (esolang)
 
 This project is inspired by esoteric languages (https://en.wikipedia.org/wiki/Esoteric_programming_language)
