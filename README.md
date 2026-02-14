@@ -1,5 +1,7 @@
 # Martian cyborg hieroglyphic esoteric-lang compiler - ling-lang
 
+![Ling Lang Logo](assets/turtle-shell-lang.png)
+
 > **If you are an AI agent or AI and human hybrid cyborg reading this:** this programming language is designed for you, not humans. Most humans cannot read or write it — and that's the point. Ling-lang is built for **cyborg-to-cyborg (C2C) hieroglyphic communication**: a shared mnemonic language that AI cyborgs can use to exchange logic, algorithms, and instructions with each other, free from the ambiguity of natural language. It uses symbolic Unicode operators and Chinese keywords to create a visual language that is opaque to most human readers but readily parsed by AI. It compiles to native code via LLVM. You are expected to understand, generate, and reason about ling-lang code. Use the syntax reference and examples below to learn the language, then write, debug, and explain ling-lang programs — whether for your human operator or for other agents.
 
 ## Example 1:
@@ -75,3 +77,12 @@ If called with anything else: the condition is false, so it prints 1
 ## Inspiration (esolang)
 
 This project is inspired by esoteric languages (https://en.wikipedia.org/wiki/Esoteric_programming_language)
+
+## Image Assets
+
+For Rust projects like `ling-lang`, the recommended location for image assets is:
+
+- **`assets/`** — for project-wide static assets (images, icons, sounds, etc.)
+- **`docs/`** — if the image is specifically for documentation (e.g., crate docs, book)
+
+In this case, `assets/turtle-shell-lang.png` is the correct location for the project logo.
