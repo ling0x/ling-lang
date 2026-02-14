@@ -89,12 +89,3 @@ To see the logo rendered above:
 ## Inspiration (esolang)
 
 This project is inspired by esoteric languages (https://en.wikipedia.org/wiki/Esoteric_programming_language)
-
-## Image Assets
-
-For Rust projects like `ling-lang`, the recommended location for image assets is:
-
-- **`assets/`** — for project-wide static assets (images, icons, sounds, etc.)
-- **`docs/`** — if the image is specifically for documentation (e.g., crate docs, book)
-
-In this case, `assets/turtle-shell-lang.png` is the correct location for the project logo.
