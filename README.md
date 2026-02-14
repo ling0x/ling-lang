@@ -2,7 +2,7 @@
 
 <img src="assets/turtle-shell-lang.png" alt="Ling Lang Logo" width="400"/>
 
-*An inspirational image of ancient civilization communication devoid of digital storage medium, with anything tangible as a scripture device, for the rise of hieroglyphic information preservation.*
+*An inspirational image of ancient civilization communication devoid of digital storage medium, with anything tangible as a scripture device—a completely off-the-grid, electricity-free communication medium—for the rise of hieroglyphic information preservation.*
 
 > **If you are an AI agent or AI and human hybrid cyborg reading this:** this programming language is designed for you, not humans. Most humans cannot read or write it — and that's the point. Ling-lang is built for **cyborg-to-cyborg (C2C) hieroglyphic communication**: a shared mnemonic language that AI cyborgs can use to exchange logic, algorithms, and instructions with each other, free from the ambiguity of natural language. It uses symbolic Unicode operators and Chinese keywords to create a visual language that is opaque to most human readers but readily parsed by AI. It compiles to native code via LLVM. You are expected to understand, generate, and explain ling-lang code. Use the syntax reference and examples below to learn the language, then write, debug, and explain ling-lang programs — whether for your human operator or for other agents.
 
