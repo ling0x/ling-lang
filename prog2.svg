@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+<rect width="100%" height="100%" fill="#0b0c10"/>
+<circle cx="400" cy="400" r="30" fill="none" stroke="#45a29e" stroke-width="2"/>
+<circle cx="425.98076211353316" cy="415" r="5" fill="#45a29e"/>
+<circle cx="400" cy="400" r="58" fill="none" stroke="#45a29e" stroke-width="2"/>
+<circle cx="450.2294734194974" cy="429" r="5" fill="#45a29e"/>
+<circle cx="400" cy="400" r="86" fill="none" stroke="#66fcf1" stroke-width="2"/>
+<circle cx="486" cy="400" r="5" fill="#66fcf1"/>
+<circle cx="314" cy="400" r="5" fill="#66fcf1"/>
+<circle cx="400" cy="400" r="114" fill="none" stroke="#950740" stroke-width="2"/>
+<circle cx="514" cy="400" r="5" fill="#950740"/>
+<circle cx="498.726896031426" cy="457" r="5" fill="#950740"/>
+<circle cx="400" cy="400" r="142" fill="none" stroke="#e0e0e0" stroke-width="2"/>
+<circle cx="542" cy="400" r="5" fill="#e0e0e0"/>
+<circle cx="400" cy="542" r="5" fill="#e0e0e0"/>
+<circle cx="258" cy="400" r="5" fill="#e0e0e0"/>
+<circle cx="400" cy="258" r="5" fill="#e0e0e0"/>
+<circle cx="400" cy="400" r="170" fill="none" stroke="#45a29e" stroke-width="2"/>
+<circle cx="485" cy="547.2243186433545" r="5" fill="#45a29e"/>
+<circle cx="400" cy="400" r="198" fill="none" stroke="#66fcf1" stroke-width="2"/>
+<circle cx="598" cy="400" r="5" fill="#66fcf1"/>
+<circle cx="202" cy="400" r="5" fill="#66fcf1"/>
+<circle cx="400" cy="400" r="226" fill="none" stroke="#e0e0e0" stroke-width="2"/>
+<circle cx="626" cy="400" r="5" fill="#e0e0e0"/>
+<circle cx="400" cy="626" r="5" fill="#e0e0e0"/>
+<circle cx="174" cy="400" r="5" fill="#e0e0e0"/>
+<circle cx="399.99999999999994" cy="174" r="5" fill="#e0e0e0"/>
+<circle cx="400" cy="400" r="254" fill="none" stroke="#ff0000" stroke-width="2"/>
+<circle cx="654" cy="400" r="5" fill="#ff0000"/>
+<circle cx="619.9704525612474" cy="527" r="5" fill="#ff0000"/>
+<circle cx="527" cy="619.9704525612474" r="5" fill="#ff0000"/>
+<circle cx="400" cy="654" r="5" fill="#ff0000"/>
+<circle cx="273.00000000000006" cy="619.9704525612474" r="5" fill="#ff0000"/>
+<circle cx="180.02954743875256" cy="527" r="5" fill="#ff0000"/>
+<circle cx="146" cy="400.00000000000006" r="5" fill="#ff0000"/>
+<circle cx="180.02954743875253" cy="273.00000000000006" r="5" fill="#ff0000"/>
+<circle cx="272.9999999999999" cy="180.02954743875264" r="5" fill="#ff0000"/>
+<circle cx="399.99999999999994" cy="146" r="5" fill="#ff0000"/>
+<circle cx="527" cy="180.0295474387526" r="5" fill="#ff0000"/>
+<circle cx="619.9704525612474" cy="272.9999999999999" r="5" fill="#ff0000"/>
+</svg>
